@@ -1,0 +1,57 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+
+
+
+{% block content %}
+    <h1> The question is:  <br>{{ question }}</h1>
+    <br>
+    <div id='x'>
+    <form>
+        {% for answer in answerDraw %}
+        <div class="answerCard">
+            <input name="chosenAnswer" id='{{ answer }}' type='radio' value='{{ answer }}'> <br>
+            <label for='{{ answer }}'> <strong>{{answer}}</strong></label>
+        </div>
+        {% endfor %}
+    </form>
+    </div>
+    <br>
+    
+    
+
+    
+
+    {% next_button %}
+{% endblock %}
+
+
+{% block styles %}
+
+    <!-- define a style -->
+    <style type="text/css">
+        .answerCard{
+            border: 2px solid black;
+            padding: 2px 16px;
+            height: 200px;
+            width: 150px;
+            margin: 20px;
+            margin-left: 0px;
+            float: left;
+            overflow: auto;
+
+            
+        }
+        .card{
+            clear:both;
+        }
+        .otree-btn-next{
+            background-color: black
+        }
+        
+    </style>
+
+   
+
+{% endblock %}

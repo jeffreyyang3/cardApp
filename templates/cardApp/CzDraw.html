@@ -1,0 +1,24 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    initial question draw
+{% endblock %}
+
+{% block content %}
+    <form name="question">
+        {% for question in questionList %}
+            <input name ="question" type='radio' value='{{question}}'> 
+            {{ question }}
+            <br>
+        {% endfor %}
+    </form>
+    
+    <br>
+    
+
+    
+
+    {% next_button %}
+
+{% endblock %}
