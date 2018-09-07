@@ -1,27 +1,44 @@
-{% extends "global/Page.html" %} {% load otree static %} 
+
+{% extends 'otree/WaitPage.html' %} 
+{% load static otree %}
+
+
+{% block title %}
+     things your good friends came up with
+{% endblock %}
+
 {% block content %}
 
-    <h1>the winner is:</h1>
+    
     <div class="cards">
         <div class="questionCard">
-            <br> <p><strong> {{ group.question }}</strong></p>
+            <br>
+            <p><strong> {{ group.question }}</strong></p>
+
         </div>
-        <div class="answerCard">
-            <br> <strong> {{ group.winAnswer }}</strong>
-        </div>
-        
+        {% for value in answers.values %}
+
+            <div class="answerCard">
+                <br>
+               <p><strong>{{ value }} </strong></p>
+            </div>
+            
+
+
+        {% endfor %}
+        <h3 style="float:left">wait for the card czar to pick their favorite!</h3>
     </div>
+    
+    
 
 
+{% endblock %}
 
-
-
-
-    {% next_button %} 
-{% endblock %} 
-<!-- define a style -->
 {% block styles %}
+
+<!-- define a style -->
 <style type="text/css">
+
     .answerCard {
         border-radius: 8px;
         border: 2px solid black;
@@ -34,6 +51,9 @@
 
 
 
+    }
+    .progress {
+        display: none;
     }
     .questionCard {
         border-radius: 8px;
@@ -49,10 +69,9 @@
     .questionCard > p{
         color: white
     }
+    
 
-    .cards {
-        margin-top: 30px;
-    }
+    
 
     #question {
         display: none;
@@ -68,7 +87,9 @@
         background-color: black;
     }
 </style>
-{% endblock %}
 
+
+
+{% endblock %}
 
 

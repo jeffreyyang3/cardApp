@@ -2,23 +2,77 @@
 {% load otree static %}
 
 {% block title %}
-    initial question draw
+    choose a fun question!
 {% endblock %}
 
 {% block content %}
-    <form name="question">
+
+
+    
+   
+<div class='cards'>
+    <form>
         {% for question in questionList %}
-            <input name ="question" type='radio' value='{{question}}'> 
-            {{ question }}
-            <br>
+        <div class="questionCard">
+            <input  name="question" id='{{ question }}' 
+            type='radio' value='{{ question }}'> <br>
+            <label for='{{ question }}'> <strong>{{question}}</strong></label>
+        </div>
         {% endfor %}
     </form>
-    
-    <br>
+</form>
+
+<br>
+
     
 
     
 
     {% next_button %}
+
+{% endblock %}
+
+
+
+{% block styles %}
+
+<!-- define a style -->
+<style type="text/css">
+    .questionCard {
+        border-radius: 8px;
+
+        background-color: black;
+        padding: 2px 16px;
+        height: 200px;
+        width: 150px;
+        margin: 20px;
+        margin-left: 0px;
+        float: left;
+    }
+    .questionCard > label{
+        color: white
+    }
+
+
+    .cards {
+        margin-top: 30px;
+    }
+
+    #question {
+        display: none;
+    }
+
+    .card {
+        clear: both;
+    }
+
+    .otree-btn-next {
+        display: block;
+        clear: both;
+        background-color: black;
+    }
+</style>
+
+
 
 {% endblock %}

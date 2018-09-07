@@ -6,7 +6,7 @@
 
 {% block content %}
 <div id="app">
-    <h1 v-text="display"></h1>
+    <h3 v-text="display"></h3>
     <h1 id="question"> {{ question }}</h1>
 
     <div class='cards'>
@@ -49,12 +49,20 @@
             },
             watch: {
                 answer() {
-                    this.display = this.original.replace('_', this.answer)
+                    if(this.original.indexOf('_') == -1){
+                        this.display = this.original + " " + this.answer    
+
+                    }
+                    else{
+                        this.display = this.original.replace('_', '[ ' + this.answer + ' ]') 
+                    }
+                    
                 }
             },
             mounted(){
                 this.original = document.getElementById("question").innerHTML
                 this.display = this.original
+                this.display = this.display.replace('_','[ ]')
                 
             }
         })

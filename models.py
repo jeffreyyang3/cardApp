@@ -60,6 +60,8 @@ class Subsession(BaseSubsession):
 
 class Group(BaseGroup):
     question = models.TextField()
+    winAnswer = models.TextField()
+    winner = models.IntegerField()
     pass
 
 
