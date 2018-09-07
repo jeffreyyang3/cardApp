@@ -5,19 +5,23 @@
 
 
 {% block content %}
-    <h1> The question is:  <br>{{ question }}</h1>
-    <br>
-    <div id='x'>
-    <form>
-        {% for answer in answerDraw %}
-        <div class="answerCard">
-            <input name="chosenAnswer" id='{{ answer }}' type='radio' value='{{ answer }}'> <br>
-            <label for='{{ answer }}'> <strong>{{answer}}</strong></label>
-        </div>
-        {% endfor %}
-    </form>
+<div id="app">
+    <h1 v-text="display"></h1>
+    <h1 id="question"> {{ question }}</h1>
+
+    <div class='cards'>
+        <form>
+            {% for answer in answerDraw %}
+            <div class="answerCard">
+                <input v-model= "answer" name="chosenAnswer" 
+                id='{{ answer }}' type='radio' value='{{ answer }}'> <br>
+                <label for='{{ answer }}'> <strong>{{answer}}</strong></label>
+            </div>
+            {% endfor %}
+        </form>
     </div>
-    <br>
+</div>
+    
     
     
 
@@ -25,6 +29,50 @@
 
     {% next_button %}
 {% endblock %}
+{% block scripts %}
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+
+    <!-- define a script -->
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                display: '',
+                answer: '',
+                original: '',
+            },
+            methods: {
+                
+                
+
+
+            },
+            watch: {
+                answer() {
+                    this.display = this.original.replace('_', this.answer)
+                }
+            },
+            mounted(){
+                this.original = document.getElementById("question").innerHTML
+                this.display = this.original
+                
+            }
+        })
+    </script>
+
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
 
 
 {% block styles %}
@@ -32,6 +80,7 @@
     <!-- define a style -->
     <style type="text/css">
         .answerCard{
+            border-radius: 8px;
             border: 2px solid black;
             padding: 2px 16px;
             height: 200px;
@@ -39,15 +88,24 @@
             margin: 20px;
             margin-left: 0px;
             float: left;
-            overflow: auto;
+
 
             
         }
+        .cards{
+            margin-top: 30px;
+        }
+        #question{
+            display: none;
+        }
+        
         .card{
             clear:both;
         }
         .otree-btn-next{
-            background-color: black
+            display: block;
+            clear:both;
+            background-color: black;
         }
         
     </style>
