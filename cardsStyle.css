@@ -1,0 +1,64 @@
+.chatbox{
+    float: left 
+    
+}
+.results{
+    float: left;
+}
+.chatbox>.otree-chat{
+    border: 2px solid black !important; 
+    border-radius: 8px !important;
+
+}
+.chatbox>.otree-chat>.otree-chat__messages{
+    background: white !important;
+}
+
+
+.answerCard {
+    border-radius: 8px;
+    border: 2px solid black;
+    padding: 2px 16px;
+    height: 260px;
+    width: 180px;
+    margin: 20px;
+    margin-left: 0px;
+    float: left;
+
+
+
+}
+.progress {
+    display: none;
+}
+.questionCard {
+    border-radius: 8px;
+
+    background-color: black;
+    padding: 2px 16px;
+    height: 260px;
+    width: 180px;
+    margin: 20px;
+    margin-left: 0px;
+    float: left;
+}
+.questionCard > p{
+    color: white;
+}
+
+
+
+
+#question {
+    display: none;
+}
+
+.card {
+    clear: both;
+}
+
+.otree-btn-next {
+    display: block;
+    clear: both;
+    background-color: black;
+}

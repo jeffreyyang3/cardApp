@@ -3,6 +3,33 @@ from ._builtin import Page, WaitPage
 from .models import Constants
 import random
 import json
+class setter(WaitPage):
+    title_text = "Please Wait"
+    body_text = "The game will start when all players have arrived."
+    def after_all_players_arrive(self):
+        if('answers' not in self.session.vars or 
+        len(self.session.vars['answers']) < (10 * (len(self.group.get_players()) - 1))):
+            answerFile = open("cardApp/cards/answers.txt", "r")
+            self.session.vars['answers'] = answerFile.readlines()
+            answerFile.close()
+            random.shuffle(self.session.vars['answers'])
+  
+#
+        
+        numPlayers = len(self.group.get_players())
+        rando = random.randrange(0,numPlayers)
+        for i in range(numPlayers):
+            if(i == rando):
+                self.group.get_players()[i].isCz = True
+                
+            else:
+                answerDraw = []
+                for x in range(10):
+                    answerDraw.append(self.session.vars['answers'].pop())
+                self.group.get_players()[i].providedCards = json.dumps(answerDraw)
+                
+
+                self.group.get_players()[i].isCz = False
 class intro(Page):
     form_model = 'player'
     form_fields = ['username']
@@ -111,13 +138,21 @@ class DisplayAnswers(WaitPage):
 
 class Results(Page):
     def vars_for_template(self):
+        winner = ''
+        wins = -1
+
         for player in self.group.get_players():
             if not player.isCz and player.chosenAnswer == self.group.winAnswer:
-                return{
-                    'winner': player.username
-                }
+                if 'wins' not in player.participant.vars:
+                    player.participant.vars['wins'] = 1
+                else:
+                    player.participant.vars['wins'] += 1
+
+                winner = player.username
+                wins = player.participant.vars['wins']
         return{
-            'winner': 'my code messed up'
+            'winner': winner,
+            'wins': wins
         }
         
 
@@ -127,6 +162,7 @@ class Results(Page):
 
 
 page_sequence = [
+    setter,
     intro,
     CzDraw,
     WaitForQuestion,

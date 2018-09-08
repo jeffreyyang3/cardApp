@@ -12,6 +12,14 @@
         </div>
         
     </div>
+    <div style="clear:both">
+            {% if wins == 1 %}
+            <h1>{{winner}} has won {{ wins }} time!</h1>
+            {% else %}
+                <h1> {{ winner }} has won {{ wins }} times!</h1>
+            {% endif %}
+    </div>
+    
 
 
 
