@@ -28,6 +28,9 @@
     
 
     {% next_button %}
+    <div class="chatbox">
+        {% chat nickname=player.username %}
+    </div>
 {% endblock %}
 {% block scripts %}
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
@@ -86,37 +89,7 @@
 {% block styles %}
 
     <!-- define a style -->
-    <style type="text/css">
-        .answerCard{
-            border-radius: 8px;
-            border: 2px solid black;
-            padding: 2px 16px;
-            height: 200px;
-            width: 150px;
-            margin: 20px;
-            margin-left: 0px;
-            float: left;
-
-
-            
-        }
-        .cards{
-            margin-top: 30px;
-        }
-        #question{
-            display: none;
-        }
-        
-        .card{
-            clear:both;
-        }
-        .otree-btn-next{
-            display: block;
-            clear:both;
-            background-color: black;
-        }
-        
-    </style>
+    <link href="{% static 'global/cardsStyle.css' %}" rel="stylesheet">
 
    
 

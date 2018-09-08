@@ -15,7 +15,7 @@ Your app description
 class Constants(BaseConstants):
     name_in_url = 'cardApp'
     players_per_group = None
-    num_rounds = 1
+    num_rounds = 3
 
 
 class Subsession(BaseSubsession):
@@ -23,7 +23,7 @@ class Subsession(BaseSubsession):
         self.group_randomly()
         print('creating subsession called')
         if('answers' not in self.session.vars or 
-        len(self.session.vars['answers']) < (10 * (len(self.get_players) - 1))):
+        len(self.session.vars['answers']) < (10 * (len(self.get_players()) - 1))):
             answerFile = open("cardApp/cards/answers.txt", "r")
             self.session.vars['answers'] = answerFile.readlines()
             answerFile.close()
@@ -50,6 +50,7 @@ class Subsession(BaseSubsession):
                 
 
                 self.get_players()[i].isCz = False
+                
         
         
 
@@ -59,6 +60,7 @@ class Subsession(BaseSubsession):
 
 
 class Group(BaseGroup):
+    
     question = models.TextField()
     winAnswer = models.TextField()
     winner = models.IntegerField()
@@ -66,8 +68,10 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
+    username = models.CharField()
     isCz = models.BooleanField()
     providedCards = models.TextField()
     question = models.TextField()
     chosenAnswer = models.TextField()
-    pass
+    def chat_nickname(self):
+        return self.player.username

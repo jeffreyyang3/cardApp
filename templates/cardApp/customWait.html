@@ -1,0 +1,39 @@
+
+{% extends 'otree/WaitPage.html' %} 
+{% load static otree %}
+
+
+{% block title %}
+    {% if player.isCz %}
+    wait for your friends!
+    {% else %}
+
+     wait for the card czar!
+     {% endif %}
+{% endblock %}
+
+{% block content %}
+    <h1>talk to your friends!!</h1>
+
+    
+    
+    <div class="chatbox">
+        {% chat nickname=player.username %}
+    </div>
+    
+    
+    
+
+
+{% endblock %}
+
+{% block styles %}
+
+<!-- define a style -->
+<link href="{% static 'global/cardsStyle.css' %}" rel="stylesheet">
+
+
+
+{% endblock %}
+
+

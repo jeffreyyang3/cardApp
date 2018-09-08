@@ -4,8 +4,13 @@ from .models import Constants
 import random
 import json
 class intro(Page):
+    form_model = 'player'
+    form_fields = ['username']
+    
     def is_displayed(self):
         return self.round_number == 1
+    def before_next_page(self):
+        self.participant.vars['username'] = self.player.username
     
 
 class CzDraw(Page):
@@ -13,6 +18,7 @@ class CzDraw(Page):
     form_fields = ['question']
 
     def is_displayed(self):
+        self.player.username = self.participant.vars['username']
         return self.player.isCz
 
     def vars_for_template(self):
@@ -48,12 +54,14 @@ class ChooseAnswer(Page):
         print(self.player.chosenAnswer)
 
 class WaitForQuestion(WaitPage):
+    template_name = 'cardApp/customWait.html'
     
 
     def after_all_players_arrive(self):
         pass
 
 class WaitForAnswers(WaitPage):
+    template_name = 'cardApp/customWait.html'
     def after_all_players_arrive(self):
         pass
 
@@ -102,6 +110,16 @@ class DisplayAnswers(WaitPage):
         }
 
 class Results(Page):
+    def vars_for_template(self):
+        for player in self.group.get_players():
+            if not player.isCz and player.chosenAnswer == self.group.winAnswer:
+                return{
+                    'winner': player.username
+                }
+        return{
+            'winner': 'my code messed up'
+        }
+        
 
     pass
 
