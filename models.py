@@ -15,7 +15,7 @@ Your app description
 class Constants(BaseConstants):
     name_in_url = 'cardApp'
     players_per_group = None
-    num_rounds = 3
+    num_rounds = 100
 
 
 class Subsession(BaseSubsession):
