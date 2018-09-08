@@ -28,18 +28,13 @@ class Subsession(BaseSubsession):
             self.session.vars['answers'] = answerFile.readlines()
             answerFile.close()
             random.shuffle(self.session.vars['answers'])
-
-        
-
-
-        
-
   
-
+#
         
         numPlayers = len(self.get_players())
+        rando = random.randrange(0,numPlayers)
         for i in range(numPlayers):
-            if(i == 0):
+            if(i == rando):
                 self.get_players()[i].isCz = True
                 
             else:
