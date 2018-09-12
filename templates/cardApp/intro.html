@@ -1,12 +1,23 @@
 {% extends "global/Page.html" %} {% load otree static %} {% block content %}
 
+ <h3>A game very heavily inspired by
+    "Cards Against Humanity".</h3>
+ <br>
 
-dont choose any of the options with multiple blanks i didnt add functionality for that <br>
-there's probably still a lot of bugs let me know if you find any <br>
-have fun
-<br><br>
 
-{% formfield player.username %}
+<h4> Instructions: </h4>
+  Each round, one player is randomly selected to be the "card czar". <br>
+  That player will choose what they think is the best out of 3 question cards. <br>
+  After the card czar has chosen, the other players each draw ten answers and choose what 
+  they think is the best answer. <br>
+  The card czar then chooses the best answer. Whoever came up with that answer wins the round.
+  
+
+
+</div>
+<br>
+
+{% formfield player.username with label="Think of a good username!"%} <br>
 
 
 
@@ -18,4 +29,19 @@ have fun
 
  {% block styles %}
  <link href="{% static 'global/cardsStyle.css' %}" rel="stylesheet">
+ {% endblock %}
+ {% block scripts %}
+  <script>
+    function myFunction() {
+      var x = document.getElementById("instructions");
+      if (x.style.display === "none") {
+          x.style.display = "block";
+      } else {
+          x.style.display = "none";
+      }
+  }
+  </script>
+
+
+
  {% endblock %}
