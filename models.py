@@ -26,7 +26,8 @@ class Group(BaseGroup):
     
     question = models.TextField()
     winAnswer = models.TextField()
-    winner = models.IntegerField()
+    winner = models.StringField()
+    wins = models.IntegerField()
     pass
 
 

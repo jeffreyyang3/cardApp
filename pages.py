@@ -100,6 +100,20 @@ class DisplayAnswersToCz(Page):
     form_fields = ['winAnswer']
     def is_displayed(self):
         return self.player.isCz
+    
+    def before_next_page(self):
+        winner = ''
+        wins = -1
+
+        for player in self.group.get_players():
+            if not player.isCz and player.chosenAnswer == self.group.winAnswer:
+                if 'wins' not in player.participant.vars:
+                    player.participant.vars['wins'] = 1
+                else:
+                    player.participant.vars['wins'] += 1
+
+                self.group.winner = player.username
+                self.group.wins = player.participant.vars['wins']
 
 
     def vars_for_template(self):
@@ -122,6 +136,8 @@ class DisplayAnswers(WaitPage):
     template_name = 'cardApp/DisplayAnswers.html'
     form_model = 'group'
     form_fields = []
+
+
     
     
     
@@ -138,21 +154,10 @@ class DisplayAnswers(WaitPage):
 
 class Results(Page):
     def vars_for_template(self):
-        winner = ''
-        wins = -1
-
-        for player in self.group.get_players():
-            if not player.isCz and player.chosenAnswer == self.group.winAnswer:
-                if 'wins' not in player.participant.vars:
-                    player.participant.vars['wins'] = 1
-                else:
-                    player.participant.vars['wins'] += 1
-
-                winner = player.username
-                wins = player.participant.vars['wins']
+        
         return{
-            'winner': winner,
-            'wins': wins
+            'winner': self.group.winner,
+            'wins': self.group.wins
         }
         
 
